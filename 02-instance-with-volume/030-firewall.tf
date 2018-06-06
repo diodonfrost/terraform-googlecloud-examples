@@ -16,8 +16,8 @@ resource "google_compute_firewall" "administration" {
     protocol = "icmp"
   }
 
-  # tags used by our http instance
-  target_tags = ["http"]
+  # tags used by our front instances
+  target_tags = ["http", "db"]
   source_ranges = ["0.0.0.0/0"]
 }
 
@@ -34,5 +34,21 @@ resource "google_compute_firewall" "web" {
 
   # tags used by our http instance
   target_tags = ["http"]
+  source_ranges = ["0.0.0.0/0"]
+}
+
+# Open web port
+resource "google_compute_firewall" "db" {
+  name    = "db"
+  network = "${google_compute_network.terraform.name}"
+
+  # Open database port
+  allow {
+    protocol = "tcp"
+    ports    = ["3306"]
+  }
+
+  # tags used by our db instance
+  target_tags = ["db"]
   source_ranges = ["0.0.0.0/0"]
 }
