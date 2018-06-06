@@ -11,6 +11,8 @@ resource "google_compute_instance" "http" {
   boot_disk {
     initialize_params {
       image = "${var.image}"
+      # set 10g for disk size
+      size = "10"
     }
   }
 

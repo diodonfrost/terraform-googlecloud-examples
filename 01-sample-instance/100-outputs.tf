@@ -7,5 +7,5 @@ output "http_internal_address" {
 
 # External address
 output "http_external_address" {
-  value = "${google_compute_instance.http.network_interface.0.address }"
+  value = "${google_compute_instance.http.network_interface.0.address}"
 }
