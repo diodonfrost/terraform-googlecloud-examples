@@ -16,8 +16,8 @@ resource "google_compute_firewall" "administration" {
     protocol = "icmp"
   }
 
-  # tags used by our front instances
-  target_tags = ["http", "db"]
+  # tags used by our http instance
+  target_tags = ["http"]
   source_ranges = ["0.0.0.0/0"]
 }
 

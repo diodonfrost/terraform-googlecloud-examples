@@ -2,10 +2,10 @@
 
 # Internal address
 output "http_internal_address" {
-  value = "${google_compute_address.http.address}"
+  value = "${google_compute_instance.http.network_interface.0.address}"
 }
 
 # External address
 output "http_external_address" {
-  value = "${google_compute_instance.http.network_interface.0.address}"
+  value = "${google_compute_address.http.address}"
 }
