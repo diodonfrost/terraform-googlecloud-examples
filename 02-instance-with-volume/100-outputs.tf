@@ -6,7 +6,7 @@ output "http_external_address" {
 }
 
 output "db_external_address" {
-  value = "${google_compute_address.db.address}"
+  value = "${google_compute_instance.db.network_interface.0.access_config.0.assigned_nat_ip}"
 }
 
 # Internal address

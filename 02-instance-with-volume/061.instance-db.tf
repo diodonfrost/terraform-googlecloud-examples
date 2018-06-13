@@ -5,18 +5,17 @@ resource "google_compute_instance" "db" {
   name         = "db-instance"
   machine_type = "f1-micro"
   zone         = "us-central1-a"
+  tags         = ["db"]
 
-  tags = ["db"]
-
+  # Set disk params
   boot_disk {
     source = "${google_compute_disk.db.name}"
   }
 
+  # Set network params
   network_interface {
     subnetwork = "${google_compute_subnetwork.http.self_link}"
-    access_config {
-      nat_ip = "${google_compute_address.db.address}"
-    }
+    access_config {}
   }
 
   # add ssh key to instance
@@ -24,12 +23,8 @@ resource "google_compute_instance" "db" {
     ssh-keys = "root:${file("~/.ssh/id_rsa.pub")}"
   }
 
+  # Run this script at first boot
   metadata_startup_script = "${file("scripts/first-boot.sh")}"
-}
-
- Creates a static IP address resource for db instance
-resource "google_compute_address" "db" {
-  name = "public-db"
 }
 
 # Create additionnal volume
