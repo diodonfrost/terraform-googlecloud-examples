@@ -2,8 +2,12 @@
 
 # Open web port
 resource "google_compute_firewall" "web" {
-  name    = "web"
-  network = "${google_compute_network.http.name}"
+  name          = "web"
+  network       = "${google_compute_network.http.name}"
+
+  # tags used by our http instance
+  target_tags   = ["http"]
+  source_ranges = ["0.0.0.0/0"]
 
   # Open http and https
   allow {
@@ -21,16 +25,16 @@ resource "google_compute_firewall" "web" {
   allow {
     protocol = "icmp"
   }
-
-  # tags used by our http instance
-  target_tags = ["http"]
-  source_ranges = ["0.0.0.0/0"]
 }
 
 # Open database port
 resource "google_compute_firewall" "db" {
-  name    = "db"
-  network = "${google_compute_network.db.name}"
+  name          = "db"
+  network       = "${google_compute_network.db.name}"
+
+  # tags used by our db instance
+  target_tags   = ["db"]
+  source_ranges = ["0.0.0.0/0"]
 
   # Open database port
   allow {
@@ -48,8 +52,4 @@ resource "google_compute_firewall" "db" {
   allow {
     protocol = "icmp"
   }
-
-  # tags used by our db instance
-  target_tags = ["db"]
-  source_ranges = ["0.0.0.0/0"]
 }
