@@ -1,5 +1,7 @@
 # How to
 
+![infra instance-with-loadbalancer](../img/04-instance-with-loadbalancer.png "infra instance-with-loadbalancer")
+
 ### Create stack
 
 ```
@@ -7,11 +9,10 @@ terraform apply
 ```
 
 This script will create:
--   1 vpc
--   2 subnet
--   4 firewall rules
--   5 instances
--   2 public IP
+-   2 network
+-   3 firewall rules
+-   1 instance group
+-   1 loadbalancer
 
 ### Delete stack
 
