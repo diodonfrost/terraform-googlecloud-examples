@@ -33,4 +33,10 @@ resource "google_compute_instance_template" "http" {
 
   # Run this script at first boot
   metadata_startup_script = "${file("scripts/first-boot-http.sh")}"
+
+  lifecycle {
+      ignore_changes = [
+          "*"
+      ]
+  }
 }
